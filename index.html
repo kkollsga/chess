@@ -4,27 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chess Game</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Chess">
-    <link rel="apple-touch-icon" href="/api/placeholder/180/180">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-        }
-
         .piece {
-            font-family: "SF Pro", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
             filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
             text-shadow: 2px 0px 5px rgba(0, 0, 0, 0.3);
             font-size: clamp(1rem, min(4vw, 4vh), 3rem);
-            touch-action: none;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
         }
 
         .piece[data-color="black"] {
@@ -1930,7 +1916,6 @@ class Game {
     }
 
     setupEventListeners() {
-        // Keep existing events
         this.boardElement.addEventListener('dragstart', (e) => this.handleDragStart(e));
         this.boardElement.addEventListener('dragover', (e) => this.handleDragOver(e));
         this.boardElement.addEventListener('drop', (e) => this.handleDrop(e));
@@ -1939,56 +1924,6 @@ class Game {
             if (piece) {
                 piece.classList.remove('opacity-50');
             }
-        });
-
-        // Add touch events
-        this.boardElement.addEventListener('touchstart', (e) => {
-            const piece = e.target.closest('.piece');
-            if (!piece) return;
-            
-            const square = piece.parentElement;
-            const touch = e.touches[0];
-            
-            // Store initial touch position
-            piece.dataset.touchStartX = touch.clientX;
-            piece.dataset.touchStartY = touch.clientY;
-            
-            // Trigger dragstart equivalent
-            const event = new Event('dragstart');
-            piece.dispatchEvent(event);
-        });
-
-        this.boardElement.addEventListener('touchmove', (e) => {
-            const piece = e.target.closest('.piece');
-            if (!piece) return;
-            
-            e.preventDefault();
-            
-            // Trigger dragover equivalent
-            const touch = e.touches[0];
-            const target = document.elementFromPoint(touch.clientX, touch.clientY);
-            if (target) {
-                const event = new Event('dragover');
-                target.dispatchEvent(event);
-            }
-        });
-
-        this.boardElement.addEventListener('touchend', (e) => {
-            const piece = e.target.closest('.piece');
-            if (!piece) return;
-            
-            const touch = e.changedTouches[0];
-            const target = document.elementFromPoint(touch.clientX, touch.clientY);
-            
-            if (target) {
-                // Trigger drop equivalent
-                const dropEvent = new Event('drop');
-                target.dispatchEvent(dropEvent);
-            }
-            
-            // Cleanup
-            delete piece.dataset.touchStartX;
-            delete piece.dataset.touchStartY;
         });
     }
 
