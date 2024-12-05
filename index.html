@@ -2348,9 +2348,32 @@ function initializeMenuHandlers() {
         Notification.show('New game started', 'success');
     });
 }
+// Add this function before the DOMContentLoaded event listener
+function getUrlFen() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fen = urlParams.get('fen');
+        if (!fen) return null;
+        
+        // Decode the FEN string
+        const decodedFen = decodeURIComponent(fen).trim();
+        
+        // Validate FEN through existing parser
+        FenParser.validatePosition(decodedFen);
+        
+        return decodedFen;
+    } catch (error) {
+        console.error('FEN parsing error:', error);
+        Notification.show('Invalid FEN in URL: ' + error.message, 'error');
+        return null;
+    }
+}
 
+// Update the DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
-    initializeGame();
+    const urlFen = getUrlFen();
+    console.log(urlFen)
+    initializeGame(urlFen);  // Existing initializeGame will handle null case
     initializeMenuHandlers();
 });
 </script>
