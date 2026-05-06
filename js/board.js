@@ -96,7 +96,6 @@ export class Board {
     this.checkSquare = inCheck ? Moves.findKing(newBoard, gameState.activeColor === 'w') : null;
 
     this.element.innerHTML = '';
-    this.element.className = 'grid grid-cols-8 w-full h-full border-2 border-gray-800 bg-white shadow-xl rounded-sm overflow-hidden relative';
 
     for (let visRow = 0; visRow < 8; visRow++) {
       for (let visCol = 0; visCol < 8; visCol++) {

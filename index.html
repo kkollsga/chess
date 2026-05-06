@@ -16,44 +16,42 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="min-h-[100dvh] flex items-center justify-center">
-  <div class="game-container flex flex-col gap-3 items-center w-full h-[100dvh] max-w-[1100px] min-w-[320px] mx-auto px-3 py-2">
+<body>
+  <div class="app">
 
     <!-- Top bar: streak + black indicator + status -->
-    <div class="flex items-center justify-between w-full">
+    <div class="app-row">
       <div id="streak-display" class="text-xs font-semibold text-amber-600 min-w-[80px]"></div>
       <div id="black-indicator" class="px-5 py-2 rounded-xl text-sm font-bold text-gray-400">Player Black</div>
       <div id="status" class="text-xs font-medium text-gray-600 min-w-[80px] text-right"></div>
     </div>
 
-    <!-- Board area: eval bar + black captures + board + white captures -->
-    <div class="flex w-full gap-2 flex-grow items-stretch justify-center">
+    <!-- Board row: eval bar + black captures + board + white captures -->
+    <div class="board-row">
 
-      <!-- Eval bar (hidden when coach disabled) -->
-      <div class="flex flex-col items-center justify-center pt-1 pb-1 w-[18px]">
-        <div id="eval-bar" class="h-full">
+      <!-- Eval bar (parent toggled hidden when coach disabled) -->
+      <div class="eval-col">
+        <div id="eval-bar">
           <div id="eval-bar-fill"></div>
           <div id="eval-bar-label"></div>
         </div>
       </div>
 
       <!-- Black captures (left of board) -->
-      <div id="black-captures" class="side-board flex flex-col items-end pt-1 w-[40px] min-w-[36px]">
-        <div class="advantage text-xs font-semibold text-gray-700 mb-1"></div>
-        <div class="pieces-container flex flex-wrap-reverse content-end justify-end gap-0.5"></div>
+      <div id="black-captures" class="side-col">
+        <div class="advantage text-xs font-semibold text-gray-700"></div>
+        <div class="pieces-container captures-list"></div>
       </div>
 
       <!-- Board with banner container -->
-      <div id="board-container" class="relative flex items-center justify-center flex-grow max-w-[min(96vw,96vh-180px)]">
-        <div class="w-full aspect-square">
-          <div id="board" class="w-full h-full grid grid-cols-8 border-2 border-gray-800 bg-white shadow-xl rounded-sm overflow-hidden"></div>
-        </div>
+      <div id="board-container" class="board-wrap">
+        <div id="board" class="board-grid"></div>
       </div>
 
       <!-- White captures (right of board) -->
-      <div id="white-captures" class="side-board flex flex-col items-start pb-1 w-[40px] min-w-[36px]">
-        <div class="pieces-container flex flex-wrap content-start justify-start gap-0.5"></div>
-        <div class="advantage text-xs font-semibold text-gray-700 mt-1"></div>
+      <div id="white-captures" class="side-col">
+        <div class="pieces-container captures-list"></div>
+        <div class="advantage text-xs font-semibold text-gray-700"></div>
       </div>
     </div>
 

@@ -1,5 +1,5 @@
 // Minimal offline-first service worker. Bumps cache version on each release.
-const CACHE = 'chess-v2';
+const CACHE = 'chess-v3';
 const ASSETS = [
   './',
   './index.html',

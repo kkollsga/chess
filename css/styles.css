@@ -42,6 +42,106 @@ html, body {
   color: var(--text);
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior: contain;
+  margin: 0;
+}
+
+/* ---- App layout ---------------------------------------------------------
+   Sized to fit the viewport without scrolling on phone-sized screens.
+   Uses min()/calc() so the board scales to whatever the viewport allows
+   minus the height taken by header/indicator/move-list/nav rows. */
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 1100px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 0.5rem 0.75rem;
+  /* dvh where supported, vh fallback for older iOS */
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+
+.app-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.board-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+/* The board container: a square sized to fit the smaller of
+   (viewport width minus side columns) or (remaining viewport height). */
+.board-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  width: min(
+    calc(100vw - 110px),
+    calc(100dvh - 230px),
+    calc(100vh - 230px),
+    640px
+  );
+  aspect-ratio: 1 / 1;
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 100%;
+  height: 100%;
+  border: 2px solid #1f2937;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  background: #fff;
+}
+
+/* Side columns (eval bar, captures) stretch to the same height as the board. */
+.side-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 38px;
+  flex: 0 0 auto;
+}
+
+/* Captures column inside a side column — simple vertical stack. */
+.captures-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+.captures-list .piece-small {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+
+/* Eval bar wrapper: a thin vertical column. */
+.eval-col {
+  width: 14px;
+  flex: 0 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 body {
@@ -170,6 +270,7 @@ body {
 /* Eval bar */
 #eval-bar {
   width: 14px;
+  height: 100%;
   border-radius: 6px;
   background: #e5e7eb;
   overflow: hidden;
