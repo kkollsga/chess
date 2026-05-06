@@ -1,0 +1,16 @@
+{
+  "name": "Chess",
+  "short_name": "Chess",
+  "description": "Play chess on your iPhone — tap or drag, with hints, sound, and an offline AI opponent.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a202c",
+  "theme_color": "#1a202c",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
