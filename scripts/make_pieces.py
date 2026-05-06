@@ -44,13 +44,19 @@ ROOK = """
 <path d="M 8 38 H37 V41 H8 Z"/>
 """ + PEDESTAL
 
-# ---- Bishop ---------------------------------------------------------------
+# ---- Bishop --------------------------------------------------------------
+# Pointed mitre with a small finial ball, a diagonal slit cut into the front,
+# a flat collar band, and a flared body to the pedestal.
 BISHOP = """
-<circle cx="22.5" cy="7" r="2"/>
-<path d="M 22.5 9 Q 14 13 15 22 Q 22.5 25 30 22 Q 31 13 22.5 9 Z"/>
-<path d="M 19 16 H26" stroke-width="1.6"/>
-<path d="M 13 22 Q 22.5 26 32 22 L 32 25 Q 22.5 28 13 25 Z"/>
-<path d="M 14 25 L 31 25 L 33 35 L 12 35 Z"/>
+<circle cx="22.5" cy="6" r="1.8"/>
+<path d="M 22.5 7
+         C 22 8 16 14 14 24
+         L 31 24
+         C 29 14 23 8 22.5 7
+         Z"/>
+<path d="M 19 13 L 23 10" fill="none" stroke-width="1.6"/>
+<path d="M 13 24 L 32 24 L 33 27 L 12 27 Z"/>
+<path d="M 14 27 L 31 27 L 33 35 L 12 35 Z"/>
 <path d="M 11 35 H34 L36 38 H9 Z"/>
 <path d="M 8 38 H37 V41 H8 Z"/>
 """ + PEDESTAL
