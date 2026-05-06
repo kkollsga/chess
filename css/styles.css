@@ -51,10 +51,11 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
-/* Piece */
+/* Piece — rendered as a background SVG keyed by data-type. */
 .piece {
-  font-family: "Apple Color Emoji", "Segoe UI Symbol", system-ui, -apple-system, sans-serif;
-  font-size: clamp(1rem, min(8.5vw, 8.5vh), 3.6rem);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 92% 92%;
   user-select: none;
   -webkit-user-select: none;
   pointer-events: none; /* board uses delegated pointer events on squares */
@@ -62,17 +63,13 @@ body {
   transition: transform 220ms cubic-bezier(.2,.7,.2,1);
   will-change: transform;
 }
-.piece[data-color="white"] {
-  color: #ffffff;
-  text-shadow:
-    -1px -1px 0 #1a1a1a,
-     1px -1px 0 #1a1a1a,
-    -1px  1px 0 #1a1a1a,
-     1px  1px 0 #1a1a1a,
-     2px  2px 3px rgba(0,0,0,.35);
-}
-.piece[data-color="black"] {
-  color: #1a1a1a;
+.piece-small {
+  width: 100%;
+  aspect-ratio: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
 }
 .piece.dragging {
   transition: none;
@@ -80,6 +77,19 @@ body {
   transform: scale(1.15);
   filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5));
 }
+
+.piece[data-type="K"] { background-image: url("../icons/pieces/wK.svg"); }
+.piece[data-type="Q"] { background-image: url("../icons/pieces/wQ.svg"); }
+.piece[data-type="R"] { background-image: url("../icons/pieces/wR.svg"); }
+.piece[data-type="B"] { background-image: url("../icons/pieces/wB.svg"); }
+.piece[data-type="N"] { background-image: url("../icons/pieces/wN.svg"); }
+.piece[data-type="P"] { background-image: url("../icons/pieces/wP.svg"); }
+.piece[data-type="k"] { background-image: url("../icons/pieces/bK.svg"); }
+.piece[data-type="q"] { background-image: url("../icons/pieces/bQ.svg"); }
+.piece[data-type="r"] { background-image: url("../icons/pieces/bR.svg"); }
+.piece[data-type="b"] { background-image: url("../icons/pieces/bB.svg"); }
+.piece[data-type="n"] { background-image: url("../icons/pieces/bN.svg"); }
+.piece[data-type="p"] { background-image: url("../icons/pieces/bP.svg"); }
 
 /* Board */
 #board {
@@ -211,13 +221,15 @@ body {
 
 /* Promotion picker */
 .promo-piece {
-  font-size: 38px;
-  width: 60px; height: 60px;
-  display: grid; place-items: center;
+  width: 64px; height: 64px;
   border-radius: 12px;
-  background: white;
+  background-color: #f3f4f6;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  pointer-events: auto;
+  background-size: 88% 88%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .promo-piece:active { transform: scale(0.95); }
 

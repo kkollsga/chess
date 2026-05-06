@@ -17,9 +17,10 @@ export class SideBoard {
     const sorted = [...captured].sort((a, b) => VALUES[b] - VALUES[a]);
     for (const ch of sorted) {
       const el = document.createElement('div');
-      el.className = 'piece text-[length:clamp(0.9rem,3vw,1.6rem)] flex items-center justify-center';
+      el.className = 'piece piece-small';
       el.dataset.color = Piece.color(ch);
-      el.textContent = Piece.symbol(ch);
+      el.dataset.type = ch;
+      el.setAttribute('aria-hidden', 'true');
       this.piecesEl.appendChild(el);
     }
     if (this.advantageEl) {

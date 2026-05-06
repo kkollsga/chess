@@ -1,5 +1,5 @@
 // Minimal offline-first service worker. Bumps cache version on each release.
-const CACHE = 'chess-v1';
+const CACHE = 'chess-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -28,7 +28,11 @@ const ASSETS = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/apple-touch-icon.png',
-  './icons/favicon.png'
+  './icons/favicon.png',
+  './icons/pieces/wK.svg', './icons/pieces/wQ.svg', './icons/pieces/wR.svg',
+  './icons/pieces/wB.svg', './icons/pieces/wN.svg', './icons/pieces/wP.svg',
+  './icons/pieces/bK.svg', './icons/pieces/bQ.svg', './icons/pieces/bR.svg',
+  './icons/pieces/bB.svg', './icons/pieces/bN.svg', './icons/pieces/bP.svg'
 ];
 
 self.addEventListener('install', (e) => {

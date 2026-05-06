@@ -9,8 +9,7 @@ export function pickPromotion(color) {
         <div class="flex gap-3">
           ${['q','r','b','n'].map(t => {
             const ch = color === 'w' ? t.toUpperCase() : t;
-            const sym = { q: '♛', r: '♜', b: '♝', n: '♞' }[t];
-            return `<button type="button" class="promo-piece" data-piece="${ch}" data-color="${color === 'w' ? 'white' : 'black'}">${sym}</button>`;
+            return `<button type="button" class="promo-piece piece" data-piece="${ch}" data-type="${ch}" data-color="${color === 'w' ? 'white' : 'black'}" aria-label="Promote to ${t}"></button>`;
           }).join('')}
         </div>
       </div>`;

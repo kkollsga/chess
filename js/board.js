@@ -144,10 +144,11 @@ export class Board {
 
   createPieceElement(fenChar) {
     const el = document.createElement('div');
-    el.className = 'piece w-full h-full flex items-center justify-center select-none';
+    el.className = 'piece w-full h-full select-none';
     el.dataset.color = Piece.color(fenChar);
     el.dataset.type = fenChar;
-    el.textContent = Piece.symbol(fenChar);
+    el.setAttribute('role', 'img');
+    el.setAttribute('aria-label', `${Piece.color(fenChar)} ${pieceName(fenChar)}`);
     return el;
   }
 
@@ -250,6 +251,11 @@ export class Board {
     this.element.addEventListener('pointerup', onPointerUp);
     this.element.addEventListener('pointercancel', () => { dragState = null; });
   }
+}
+
+function pieceName(fen) {
+  const map = { k: 'king', q: 'queen', r: 'rook', b: 'bishop', n: 'knight', p: 'pawn' };
+  return map[fen.toLowerCase()] || 'piece';
 }
 
 function findMovedPiece(oldBoard, newBoard) {
