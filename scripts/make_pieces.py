@@ -55,25 +55,27 @@ BISHOP = """
 <path d="M 8 38 H37 V41 H8 Z"/>
 """ + PEDESTAL
 
-# ---- Knight ---------------------------------------------------------------
-# Stylized horse-head silhouette facing right (ear up, mane back, muzzle right).
+# ---- Knight --------------------------------------------------------------
+# Stylized horse-head silhouette facing right. Smooth curves: back of neck
+# rises into the crown, forehead drops to the snout, throat tucks under,
+# chest curves down to the body. Ear and eye added for character.
 KNIGHT = """
-<path d="M 13 38
-         L 13 32
-         Q 8 28 12 23
-         L 11 18
-         Q 13 11 22 9
-         Q 26 7 30 9
-         Q 35 13 36 19
-         L 35 26
-         L 31 28
-         L 29 32
-         L 32 38
+<path d="M 12 38
+         C 10 32 8 22 14 16
+         C 17 12 22 8 28 9
+         L 33 13
+         L 36 19
+         L 37 22
+         L 35 24
+         L 30 24
+         C 27 25 25 27 24 30
+         L 24 38
          Z"/>
-<path d="M 26 11 L 23 6 L 21 12 Z"/>
-<circle cx="28" cy="17" r="1.2" fill="#0a0a0a" stroke="none"/>
-<path d="M 17 19 Q 13 22 15 26" fill="none" stroke-width="1.4"/>
-<path d="M 11 38 H34 L36 41 H9 Z"/>
+<path d="M 22 8 L 19 3 L 18 10 Z"/>
+<circle cx="29" cy="16" r="1.2" fill="#0a0a0a" stroke="none"/>
+<path d="M 13 18 Q 11 24 13 30" fill="none" stroke-width="1.3"/>
+<path d="M 16 21 Q 14 26 15 30" fill="none" stroke-width="1.1"/>
+<path d="M 11 38 H24 L26 41 H9 Z"/>
 """ + PEDESTAL
 
 # ---- Queen ----------------------------------------------------------------
@@ -114,14 +116,14 @@ KING = """
 
 PIECES = {'P': PAWN, 'R': ROOK, 'B': BISHOP, 'N': KNIGHT, 'Q': QUEEN, 'K': KING}
 
-# White: white fill, black stroke. Black: dark fill, lighter outline highlight.
+# White: white fill, black stroke. Black: dark grey fill (so the black outline
+# stays visible against the silhouette).
 def colorize(content: str, color: str) -> str:
     if color == 'w':
-        # color="currentColor" — set on the wrapping element via class in CSS
         return content.replace('fill="currentColor"', 'fill="#f8f8f8"')\
-                      .replace('stroke="#0a0a0a"', 'stroke="#0a0a0a"')
-    # black: dark fill, slightly lighter outline so the silhouette reads on dark backgrounds
-    return content.replace('fill="currentColor"', 'fill="#1a1a1a"')\
+                      .replace('stroke="#0a0a0a"', 'stroke="#1a1a1a"')
+    # black: medium-dark grey body, near-black outline
+    return content.replace('fill="currentColor"', 'fill="#3a3a3a"')\
                   .replace('stroke="#0a0a0a"', 'stroke="#0a0a0a"')
 
 for color in ('w', 'b'):
